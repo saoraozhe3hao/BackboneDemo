@@ -3,41 +3,198 @@
 <head>
    <title>backbone</title>
    <script src="js/jquery.js" type="text/javascript"></script>
+   <!-- backbone 依赖 underscore-->
    <script src="js/underscore.js" type="text/javascript"></script>
    <script src="js/backbone.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="divTip"></div>
+    <div id="backbone">
+        <div id="divTip"></div>
+        <!-- underscore 模板 -->
+        <script type="text/template" id="template">
+            <%= age %>
+        </script>
+    </div>
 </body>
 <script type="text/javascript">
     $(function(){
-	    //返回一个模型构造函数，得到Test.prototype.defaults
-	    window.Test = Backbone.Model.extend({
+        /*****************************************    Model   ***************************************************/
+        //定义一个模型构造函数
+	    window.Man = Backbone.Model.extend({
+            //默认属性
 		    defaults:{
-			    content1: '1'
-			}
+			    age: '1'
+			},
+            //实例化时调用
+            initialize:function(){
+
+            },
+            //设值开启校验时调用
+            validate:function(attrs){
+                //返回错误信息
+                if(attrs.age > 100) return '错误';
+            },
+            //调用save 和 fetch 时使用
+            url:"/api.php",
+            //指定哪个属性作为ID
+            idAttribute:"name",
+            //自定义成员
+            print:function(){
+                //获取属性
+                console.log(this.get('age'));
+            }
 		});
-		//返回模型对象，得到m.attributes，包含 content1,content2
-		var m = new Test({
-		    content2: '2'
+        //实例化一个模型对象，并设置初始属性。属性存在man.attributes中
+		var man = new Man({
+		    sex: '2'
 		});
-		//返回一个构造函数，得到TestList.prototype.model。集合即模型的集合
-		window.TestList = Backbone.Collection.extend({
-		    model:Test
+        //访问自定义成员
+        man.print();
+        //模型对象变化事件。除了on还可以用once，只执行一次
+        man.on('change:sex change:age',function(model,value){
+            //获取修改前的值
+            console.log(model.previous("sex"));
+        });
+        //绑定事件的另一种方式
+        man.on({
+            //校验错误事件
+            "invalid":function(model,error){
+                console.log(error);
+            }
+        });
+        //触发一个自定义事件
+        man.trigger("change_age_sex");
+        //移除事件,all表示全部事件
+        man.off("all");
+        //设置属性，并开启校验
+        man.set({age:2},{validate:true});
+        //静默修改属性，不触发任何事件
+        man.set("age",3,{silent:true});
+        //删除属性
+        man.unset("sex");
+        //Post请求，fetch则是get请求，destroy则是delete请求
+        man.save({color:"white"},{
+            success:function(model,response){
+                //成功回调
+            },
+            error:function(){
+                //失败回调
+            },
+            wait:true //发送前进行校验
+        });
+
+        /*****************************************    Collection   ***************************************************/
+		//定义一个集合构造函数
+		window.People = Backbone.Collection.extend({
+            //并指定集合元素的模型
+		    model:Man,
+            //比较方法，用于sort
+            comparator:function(model_1,model_2){
+                // 返回 0 表示 model_1 排在 model_2 前面
+                return model_1.get('age') > model_2.get('age') ? 0 : 1;
+            },
+            //fetch 和 create 时使用
+            url:"/api.php",
+            //自定义方法
+            getOld:function(){
+                //调用集合自带方法filter
+                return this.filter(function(man){
+                    return man.age > 50;
+                });
+            }
 		});
-		//返回一个集合对象，得到data.models[0].attributes，包含 content1,content3
-		var data = new TestList({
-		    content3:'3'
+		//实例化一个集合对象，并设置初始元素。传入一个对象，则集合中只有一个元素；传入一个数组，则集合中有多个元素
+        //集合元素存在 people.models中
+		var people = new People({
+		    color:'yellow'
 		});
+        //调用自定义方法
+        people.getOld();
+        //移除元素。shift 移除第一个；pop 移除最后一个
+        people.remove(people.models[0]);
+        //插入元素。unshift 插入到第一个；push插入到最后一个
+        people.add(man,{at:0});
+        //获取元素。get 根据ID获取
+        var m = people.at(0);
+        //查找元素。where 查找多个
+        m = people.findWhere({
+            age:1
+        });
+        //排序
+        people.sort();
+
+
+        /*****************************************    View   ***************************************************/
 		//返回一个View构造函数
-		window.TestView = Backbone.View.extend({
-		    //控制目标
-		    el: $("body"),
+		window.Tip = Backbone.View.extend({
+		    //给this.el 指定一个元素节点，如果没有指定，则新建一个元素节点对象
+//		    el: $("#backbone"),
+            //新建节点对象的id和class
+            id: "newId",
+            className:"newClass",
+            //初始化方法，实例化时会调用
 			initialize:function(){
-			    $("#divTip").html(data.models[0].get("content"));
-			}
+			    $("#divTip").html(this.el);
+			},
+            //绑定DOM事件
+            events:{
+                'click #divTip':'clickTip'
+            },
+            clickTip: function () {
+            },
+            //自定义成员
+            render:function(){
+                //html() 得到一个字符串，作为underscore的模板。template() 返回一个模板函数
+                this.template = _.template($("#template").html());
+                // $el 即 el对应的jQuery对象。给模板函数传入一个数据对象
+                this.$el.html(this.template(this.model.attributes));
+                //解除事件
+                this.undelegateEvents();
+                //绑定事件
+                this.delegateEvents(this.events);
+            }
 		});
-		window.App = new TestView;
+        //实例化View对象，并设置成员
+		window.tip = new Tip({model:man});
+        tip.render();
+        //监听man的change事件，调用initialize。另有listenToOnce
+        tip.listenTo(man,'change',tip.initialize);
+        //停止监听
+        tip.stopListening(man,'change');
+
+        /*****************************************    Router   ***************************************************/
+        window.Router = Backbone.Router.extend({
+            initialize:function(){
+                //实例化时调用
+            },
+            routes:{
+                '':'main',  //空路径调用main()
+                'search/:key':'search',  //接受 #search/参数1 ,调用search()
+                'search/:key/p:page':'search', //接受 #search/参数1/p参数2
+                '*any':'main' //任意路径，这个路径会作为参数传到回调函数
+            },
+            main:function(any){
+                console.log('main');
+                console.log(any);
+            }
+        });
+        //实例化路由对象
+        window.router = new Router();
+        //添加路由，三个参数分别为 路径 路由 回调函数
+        router.route('detail','detail',function(){
+
+        });
+        //绑定路由回调函数
+        router.on('route:search',function(key,page){
+            console.log(key);
+            console.log(page);
+        });
+        //启用路由功能
+        Backbone.history.start();
+        //跳转到指定路由
+        router.navigate("main");
+        //停用路由功能
+        Backbone.history.stop();
 	});
 </script>
 </html>
