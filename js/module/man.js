@@ -1,5 +1,5 @@
-//定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
-define('man',[],function (require, exports, module) {
+//定义一个模块
+define(function (require, exports, module) {
 
     //引用其他模块
     var Human = require('./human');

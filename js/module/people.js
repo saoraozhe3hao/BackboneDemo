@@ -1,7 +1,7 @@
-//定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
-define('people', ['human','man'], function (require, exports, module) {
-    var Human = module.dependencies[0];
-    var man = module.dependencies[1];
+//定义一个模块
+define(function (require, exports, module) {
+    var Human = require('module/human');
+    var man = require('module/man');
 
     //定义一个集合构造函数
     var People = Backbone.Collection.extend({

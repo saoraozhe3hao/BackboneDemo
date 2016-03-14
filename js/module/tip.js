@@ -1,5 +1,5 @@
 //定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
-define('tip',[],function (require, exports, module) {
+define(function (require, exports, module) {
 
     //返回一个View构造函数
     var Tip = Backbone.View.extend({
@@ -18,7 +18,10 @@ define('tip',[],function (require, exports, module) {
         },
         clickTip: function () {
         },
-        //自定义成员
+        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染
+        options:{
+
+        },
         render: function () {
             //html() 得到一个字符串，作为underscore的模板。template() 返回一个模板函数
             this.template = _.template($("#template").html());
