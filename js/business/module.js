@@ -53,7 +53,7 @@
 
     /*******************************************  入口 ***********************************************/
     //使用模块，不以 点 或 杠 开通的路径，会与seajs.config 的 base拼接
-    seajs.use(['module/people', 'module/man','module/tip'], function (people, man,Tip) {
+    seajs.use(['business/people', 'business/man','business/tip'], function (people, man,Tip) {
 
         //实例化View对象，并设置成员
         var tip = new Tip({model: man});

@@ -1,7 +1,7 @@
 //定义一个模块
 define(function (require, exports, module) {
-    var Human = require('module/human');
-    var man = require('module/man');
+    var Human = require('business/human');
+    var man = require('business/man');
 
     //定义一个集合构造函数
     var People = Backbone.Collection.extend({
