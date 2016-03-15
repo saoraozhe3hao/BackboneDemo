@@ -12,14 +12,15 @@
     <script src="js/lib/backbone.js" type="text/javascript"></script>
 </head>
 <body>
-<div id="backbone">
-    <div id="divTip"></div>
+<div id="top">
+    <div class="title"></div>
     <!-- underscore 模板 -->
     <script type="text/template" id="template">
-        <%= age %>
+        <a href="#search">search</a>         <%= age %>    <a href="#detail">detail</a>
     </script>
 </div>
+<div id="content"></div>
 </body>
 <!-- 程序入口 -->
-<script src="js/business/module.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
 </html>
