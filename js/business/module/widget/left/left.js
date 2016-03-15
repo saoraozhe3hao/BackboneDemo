@@ -16,7 +16,7 @@ define(function (require, exports, module) {
         //绑定DOM事件
         events: {
         },
-        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染
+        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染  / destroy 清除
         options:{
         },
         render: function () {
@@ -25,7 +25,10 @@ define(function (require, exports, module) {
             me.$el.append('<div>左侧导航</div>');
             // el 即 这个View 新建的元素节点
             $(me.options.wrapper).append(me.el);
-        }
+        },
+		destroy: function(){
+			this.$el.remove();
+		}
     });
 
     //CMD 模块规范，exports 即 要输出的对象。以下是设置这个对象的两种写法

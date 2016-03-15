@@ -4,7 +4,7 @@
     seajs.config({
         //别名
         alias: {
-            'jquery': 'js/lib/jquery'
+            'jquery': 'lib/jquery'
         },
         //映射
         map: [

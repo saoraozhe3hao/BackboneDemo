@@ -28,6 +28,7 @@ define(function (require, exports, module) {
     });
     //添加路由，三个参数分别为 路径 路由 回调函数
     router.route('detail', 'detail', function(){
+        // 引入一个文件、得到里面定义的模块，并使用ID 为 business/module/unit/detail/detail 的模块。如果里面没有声明该ID的模块，那么该ID的模块就是文件里最后一个没有声明ID的模块
         seajs.use('business/module/unit/detail/detail');
     });
     //启用路由功能

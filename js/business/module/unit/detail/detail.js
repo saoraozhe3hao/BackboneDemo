@@ -1,5 +1,10 @@
 //定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
-define(function (require, exports, module) {
+//模块ID说明：如果本文件里定义的模块 所声明的ID 都与本文件不同名，那么本文件最后一个没声明ID的模块 的ID 与本文件 同名
+//依赖模块列表说明：未被下载的文件会被下载下来，但是不会执行模块function里的内容，只在被use 或 require时，才会被执行
+define('business/module/unit/detail/detail',['business/top/model/people'],function (require, exports, module) {
+
+    //引用模块
+    var human = require(module.dependencies[0]);
 
     //返回一个View构造函数
     var Detail = Backbone.View.extend({
@@ -15,7 +20,7 @@ define(function (require, exports, module) {
         //绑定DOM事件
         events: {
         },
-        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染
+        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染  / destroy 清除
         options:{
 
         },
@@ -25,7 +30,10 @@ define(function (require, exports, module) {
             me.$el.append('<div>详情页面</div>');
             // el 即 这个View 新建的元素节点
             $("#content").append(me.el);
-        }
+        },
+		destroy: function(){
+			this.$el.remove();
+		}
     });
 
     //实例化View对象，并设置成员
@@ -36,3 +44,4 @@ define(function (require, exports, module) {
     exports.a = 1;
     module.exports = detail;
 });
+

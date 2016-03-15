@@ -1,4 +1,4 @@
-//定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
+//定义一个模块
 define(function (require, exports, module) {
 
     //引入左侧导航模块
@@ -20,7 +20,7 @@ define(function (require, exports, module) {
         //绑定DOM事件
         events: {
         },
-        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染
+        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染  / destroy 清除
         options:{
             wrapper:"#content"
         },
@@ -33,7 +33,11 @@ define(function (require, exports, module) {
             me.$el.append('<div>搜索页面</div>');
             // el 即 这个View 新建的元素节点
             $(me.options.wrapper).append(me.el);
-        }
+        },
+		destroy: function(){
+			this.$el.remove();
+			this.widget.left.destroy();
+		}
     });
 
     //实例化View对象，并设置成员

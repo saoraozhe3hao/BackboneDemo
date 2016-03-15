@@ -19,7 +19,7 @@ define(function (require, exports, module) {
         //调用save 和 fetch 时使用
         url: "/api.php",
         //指定哪个属性作为ID
-        idAttribute: "name",
+        idAttribute: "age",
         //自定义成员
         print: function () {
             //获取属性

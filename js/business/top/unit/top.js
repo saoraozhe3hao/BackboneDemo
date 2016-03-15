@@ -1,4 +1,4 @@
-//定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
+//定义一个模块
 define(function (require, exports, module) {
 
     //返回一个View构造函数
@@ -20,7 +20,7 @@ define(function (require, exports, module) {
         clickLink: function () {
             console.log('go');
         },
-        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染
+        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染  / destroy 清除
         options:{
 
         },
@@ -33,7 +33,10 @@ define(function (require, exports, module) {
             this.undelegateEvents();
             //绑定事件
             this.delegateEvents(this.events);
-        }
+        },
+		destroy: function(){
+			
+		}
     });
 
     //引用其他模块，以点开头的路径相对于当前文件
