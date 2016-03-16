@@ -4,7 +4,7 @@
 define('project/module/unit/detail/detail',['base/component/top/model/people'],function (require, exports, module) {
 
     //引用模块
-    var human = require(module.dependencies[0]);
+    var people = require(module.dependencies[0]);
 
     //返回一个View构造函数
     var Detail = Backbone.View.extend({
@@ -26,7 +26,7 @@ define('project/module/unit/detail/detail',['base/component/top/model/people'],f
         },
         render: function () {
             var me = this;
-            // $el 即 el对应的jQuery对象。
+            // $el 即 el对应的jQuery对象。引用全局模板
             me.$el.append(window.templates['project/module/unit/detail/detail.html']);
             // el 即 这个View 新建的元素节点
             $("#content").append(me.el);
