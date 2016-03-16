@@ -10,12 +10,12 @@
         map: [
             [/^(.*)\.js$/i, '$1\.js?333']
         ],
-        base: './js',
+        base: './',
         charset: 'utf-8',
         timeout: 20000
     });
 
     /*******************************************  入口 ***********************************************/
     //使用模块，不以 点 或 杠 开通的路径，会与seajs.config 的 base拼接
-    seajs.use(['router','business/top/unit/top']);
+    seajs.use(['router','base/component/top/unit/top']);
 })();

@@ -1,0 +1,13 @@
+{
+  "name": "backbone",
+  "description": "backbone.",
+  "version": "1.0.0",
+  "author": "Hong",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-watch": "~0.6.1",
+    "load-grunt-tasks": "~3.2.0",
+    "grunt-common-html2js":""
+  }
+}

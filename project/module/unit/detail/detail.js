@@ -1,7 +1,7 @@
 //定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
 //模块ID说明：如果本文件里定义的模块 所声明的ID 都与本文件不同名，那么本文件最后一个没声明ID的模块 的ID 与本文件 同名
 //依赖模块列表说明：未被下载的文件会被下载下来，但是不会执行模块function里的内容，只在被use 或 require时，才会被执行
-define('business/module/unit/detail/detail',['business/top/model/people'],function (require, exports, module) {
+define('project/module/unit/detail/detail',['base/component/top/model/people'],function (require, exports, module) {
 
     //引用模块
     var human = require(module.dependencies[0]);
@@ -27,7 +27,7 @@ define('business/module/unit/detail/detail',['business/top/model/people'],functi
         render: function () {
             var me = this;
             // $el 即 el对应的jQuery对象。
-            me.$el.append('<div>详情页面</div>');
+            me.$el.append(window.templates['project/module/unit/detail/detail.html']);
             // el 即 这个View 新建的元素节点
             $("#content").append(me.el);
         },
