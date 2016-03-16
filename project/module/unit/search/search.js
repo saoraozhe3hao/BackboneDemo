@@ -15,7 +15,6 @@ define(function (require, exports, module) {
         initialize: function () {
             // 实例化左侧导航部件，参数传给 Left 的 initialize
             this.widget.left = new Left({wrapper:this.options.wrapper});
-            this.widget.left.render();
         },
         //绑定DOM事件
         events: {
@@ -29,8 +28,9 @@ define(function (require, exports, module) {
         },
         render: function () {
             var me = this;
+            me.widget.left.render();
             // $el 即 el对应的jQuery对象。
-            me.$el.append('<div>搜索页面</div>');
+            me.$el.html('<div>搜索页面</div>');
             // el 即 这个View 新建的元素节点
             $(me.options.wrapper).append(me.el);
         },
@@ -42,7 +42,6 @@ define(function (require, exports, module) {
 
     //实例化View对象，并设置成员
     var search = new Search();
-    search.render();
 
     //CMD 模块规范，exports 即 要输出的对象。以下是设置这个对象的两种写法
     exports.a = 1;

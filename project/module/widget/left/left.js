@@ -22,9 +22,9 @@ define(function (require, exports, module) {
         render: function () {
             var me = this;
             // $el 即 el对应的jQuery对象。
-            me.$el.append('<div>左侧导航</div>');
+            me.$el.html('<div>左侧导航</div>');
             // el 即 这个View 新建的元素节点
-            $(me.options.wrapper).append(me.el);
+            $(me.options.wrapper).html(me.el);
         },
 		destroy: function(){
 			this.$el.remove();
