@@ -46,7 +46,7 @@ define(function (require, exports, module) {
                 ordering: false, // 是否排序
                 info: true, // 是否显示统计信息
                 processing: true, // 耗时计算时，是否显示 “正在处理”
-                sDom: 'Rlfrtip',
+                sDom: 'Rlfrtip', // 列可伸缩配置，见 http://legacy.datatables.net/extras/
 
                 /**************************** 尺寸选项 ***************************************/
                 scrollX: true,  // 表格超出容器时，是否出现滚动条
