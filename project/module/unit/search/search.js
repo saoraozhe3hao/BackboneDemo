@@ -34,8 +34,7 @@ define(function (require, exports, module) {
             /********************************************* DataTables 组件 ***********************************************************/
             //增加table元素节点
             me.$el.append('<table id="datatable" class="display" cellspacing="0" width="100%"></table>');
-            // 引入 DataTables 组件
-            require("base/lib/jquery.dataTables");
+
             // 设置 DataTables 报错方式，
             $.fn.dataTable.ext.errMode = 'throw'; //另有 alert,none
             // 创建DataTables实例， Datatable 的容器必须是 table 元素节点
@@ -47,6 +46,7 @@ define(function (require, exports, module) {
                 ordering: false, // 是否排序
                 info: true, // 是否显示统计信息
                 processing: true, // 耗时计算时，是否显示 “正在处理”
+                sDom: 'Rlfrtip',
 
                 /**************************** 尺寸选项 ***************************************/
                 scrollX: true,  // 表格超出容器时，是否出现滚动条
