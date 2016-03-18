@@ -1,2 +1,2 @@
 # BackboneDemo
-backbone.js 示例
+backbone.js 与 组件 示例
