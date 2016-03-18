@@ -31,7 +31,7 @@ define(function (require, exports, module) {
 
             me.$el.css("width", 900);
 
-            /********************************************* DataTables 组件 ***********************************************************/
+            /********************************************* DataTables 组件 http://datatables.club/ ***********************************************************/
             //增加table元素节点
             me.$el.append('<table id="datatable" class="display" cellspacing="0" width="100%"></table>');
 

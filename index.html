@@ -2,8 +2,6 @@
 <html>
 <head>
     <title>backbone</title>
-    <!--  样式 -->
-    <link rel="stylesheet" type="text/css" href="base/assets/css/jquery.dataTables.css">
     <!-- 模块加载器 -->
     <script src="base/lib/sea.js" type="text/javascript"></script>
     <!-- DOM 库 -->
@@ -13,16 +11,20 @@
     <!-- 框架 -->
     <script src="base/lib/backbone.js" type="text/javascript"></script>
     <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="base/assets/css/jquery.dataTables.css">
     <script src="base/lib/jquery.dataTables.js" type="text/javascript"></script>
     <!-- DataTable 的列可伸缩插件，见 http://legacy.datatables.net/extras/ -->
     <script src="base/lib/colReorderWithResize.js" type="text/javascript"></script>
+    <!-- zTree -->
+    <link rel="stylesheet" type="text/css" href="base/assets/css/zTreeStyle/zTreeStyle.css">
+    <script src="base/lib/jquery.ztree.core.js"  type="text/javascript"></script>
 </head>
 <body>
 <div id="top">
     <div class="title"></div>
     <!-- underscore 模板 -->
     <script type="text/template" id="template">
-        <a href="#search">search</a>         <%= age %>    <a href="#detail">detail</a>
+        <a href="#search">DataTable</a>         <%= age %>    <a href="#detail">zTree</a>
     </script>
 </div>
 <div id="content"></div>
