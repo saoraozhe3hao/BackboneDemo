@@ -16,7 +16,7 @@ define(function (require, exports, module) {
         //绑定DOM事件
         events: {
         },
-        //自定义成员，习惯上的三个自定义成员：options 存放参数 /  widget 引用的其他组件 /  render  渲染  / destroy 清除
+        //自定义成员，习惯上的三个自定义成员：options或attrs 存放参数 / data 存放数据 / widget 引用的其他组件 /  render  渲染  / destroy 清除
         options:{
         },
         render: function () {
