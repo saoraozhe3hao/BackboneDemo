@@ -21,7 +21,7 @@ define(function (require, exports, module) {
         },
         render: function () {
             var me = this;
-            // $el 即 el对应的jQuery对象。
+            // $el 即 el对应的jQuery对象。 me.$()  相当于 me.$el.find()
             me.$el.html('<div>左侧导航</div>');
             // el 即 这个View 新建的元素节点
             $(me.options.wrapper).html(me.el);
