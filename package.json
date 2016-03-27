@@ -6,8 +6,10 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-common-html2js": "",
     "grunt-contrib-watch": "~0.6.1",
-    "load-grunt-tasks": "~3.2.0",
-    "grunt-common-html2js":""
+    "gulp": "^3.9.1",
+    "gulp-jsmin": "^0.1.5",
+    "load-grunt-tasks": "~3.2.0"
   }
 }
