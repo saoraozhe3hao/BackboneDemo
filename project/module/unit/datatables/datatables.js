@@ -12,7 +12,8 @@ define(function (require, exports, module) {
         id: "searchId",
         className: "searchClass",
         //初始化方法，实例化时会调用
-        initialize: function () {
+        initialize: function (options) {
+			//传进来的options 会自动赋给 this.options
             // 实例化左侧导航部件，参数传给 Left 的 initialize
             this.widget.left = new Left({wrapper: this.options.wrapper});
         },
@@ -22,6 +23,7 @@ define(function (require, exports, module) {
         options: {
             wrapper: "#content"
         },
+		// 在这里定义，那么这个widget是原型里的成员，多个VIew的多个实例共享同一个widget
         widget: {},
         render: function () {
             var me = this;
