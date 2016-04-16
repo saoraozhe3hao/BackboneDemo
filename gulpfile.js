@@ -1,12 +1,24 @@
 var gulp = require('gulp');
 var jsmin = require('gulp-jsmin');   // JS 压缩插件
 var rename = require('gulp-rename'); // 在 gulp-jsmin 中定义的
+var through = require("through2");
 
 // 定义任务，传入任务名 和 任务脚本
 gulp.task('default', function() {
     // src 获取匹配文件，pipe 通过管道流给其他插件处理。
     gulp.src('project/module/**/*.js', { base: 'project' })
         .pipe(jsmin())
+        .pipe(through.obj(function(file, encode, cb) {
+            // 获取内容
+            var contents = file.contents.toString(encode);
+
+            // 处理内容
+
+            // 重设内容
+            file.contents = new Buffer(contents, encode);
+            //回调
+            cb(null, file, encode);
+        }))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('build'));  // build 目录下生成的路径从 module 开始，即 src - base 。
 });
