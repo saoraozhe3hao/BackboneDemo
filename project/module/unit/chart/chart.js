@@ -13,19 +13,19 @@ define(function (require, exports, module) {
         className: "chartClass",
         //初始化方法，实例化时会调用
         initialize: function (options) {
-			//传进来的options 会自动赋给 this.options
+            //传进来的options 会自动赋给 this.options
             // 实例化左侧导航部件，参数传给 Left 的 initialize
             this.widget.left = new Left({wrapper: this.options.wrapper});
         },
         //绑定DOM事件
         events: {
-            'click button':'action'
+            'click button': 'action'
         },
         //自定义成员，习惯上的三个自定义成员：options 存放参数 /  data 存放数据 / widget 引用的其他组件 /  render  渲染  / destroy 清除
         options: {
             wrapper: "#content"
         },
-		// 在这里定义，那么这个widget是原型里的成员，多个VIew的多个实例共享同一个widget
+        // 在这里定义，那么这个widget是原型里的成员，多个VIew的多个实例共享同一个widget
         widget: {},
         render: function () {
             var me = this;
@@ -43,7 +43,7 @@ define(function (require, exports, module) {
             Charts.defaults.global.title.position = 'top'; // 标题相关配置在 global.title 里面
             Charts.defaults.global.legend.position = 'top'; // 图例相关配置在 global.legend 里面
             // 另还有 提示 tooltips，动画 animation 的全局配置
-            /**************************************************  曲线图 *****************************************************/
+            /**************************************************  曲线图、折线图 *****************************************************/
             var lineCtx = me.$("#lineChart").get(0);
             var lineData = {
                 labels: ["January", "February", "March", "April", "May", "June", "July"],  // 横坐标
@@ -86,26 +86,107 @@ define(function (require, exports, module) {
                 ]
             };
 
-            me.widget.lineChart = new Charts(lineCtx,{
+            me.widget.lineChart = new Charts(lineCtx, {
                 type: 'line',
                 data: lineData,
                 options: {
-                    showLines:true // 点之间是否连线
+                    showLines: true // 点之间是否连线
                 }
             });
 
             /**************************************************  柱状图 *****************************************************/
+            var barCtx = me.$("#barChart").get(0);
+            var barData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"], // 横坐标
+                datasets: [
+                    {
+                        label: "My First dataset",
+                        backgroundColor: "rgba(255,99,132,0.2)",
+                        borderColor: "rgba(255,99,132,1)",
+                        borderWidth: 1,
+                        hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                        hoverBorderColor: "rgba(255,99,132,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]   // 纵坐标
+                    },
+                    {
+                        label: "My Second dataset",
+                        backgroundColor: "rgba(54,162,235,0.2)",
+                        borderColor: "rgba(54,162,235,1)",
+                        borderWidth: 1,
+                        hoverBackgroundColor: "rgba(54,162,235,0.4)",
+                        hoverBorderColor: "rgba(54,162,235,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            };
+            me.widget.barChart = new Charts(barCtx, {
+                type: 'bar',
+                data: barData,
+                options: {}
+            });
+            /************************************************** 饼图 *****************************************************/
+            var pieCtx = me.$("#pieChart").get(0);
+            var pieData = {
+                labels: ["Red", "Green", "Yellow"],
+                datasets: [
+                    {
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ]
+                    }
+                ]
+            };
+            me.widget.pieChart = new Charts(pieCtx,{
+                type: 'pie',
+                data: pieData,  // 数据不能被两个图表同时使用，否则只能显示一个出来
+                options: {
 
+                }
+            });
+            /************************************************** 圈图 *****************************************************/
+            var doughnutCtx = me.$("#doughnutChart").get(0);
+            var doughnutData = {
+                labels: ["Red", "Green", "Yellow"],
+                datasets: [
+                    {
+                        data: [300, 50, 100],
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ]
+                    }
+                ]
+            };
+            me.widget.doughnutChart = new Charts(doughnutCtx,{
+                type: 'doughnut',
+                data: doughnutData, // 数据不能被两个图表同时使用，否则只能显示一个出来
+                options: {
 
+                }
+            });
         },
         destroy: function () {
             this.$el.remove();
             this.widget.left.destroy();
         },
-        action:function(){
+        action: function () {
             var me = this;
             /************************************************** chart 方法 *****************************************************/
-            // 修改数据后更新图表
+                // 修改数据后更新图表
             me.widget.lineChart.data.datasets[0].label = '第一项';
             me.widget.lineChart.update();
             // 停止动画
