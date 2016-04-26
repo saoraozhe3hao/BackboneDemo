@@ -29,11 +29,18 @@ define(function (require, exports, module) {
         seajs.use('project/module/unit/datatables/datatables',function(view){view.render()});
     });
     //添加路由，三个参数分别为 路径 路由 回调函数
-    router.route('ztree', 'ztreeztree', function(){
+    router.route('ztree', 'ztree', function(){
         // 把该模块下面的模板JS 引入，该文件由grunt将HTML 打包而来
         require('project/module/templates');
         // require 或 use 模块，构造模块的代码之后执行一次。因此需要每次都render
         seajs.use('project/module/unit/ztree/ztree',function(view){view.render()});
+    });
+    //添加路由，三个参数分别为 路径 路由 回调函数
+    router.route('chart', 'chart', function(){
+        // 把该模块下面的模板JS 引入，该文件由grunt将HTML 打包而来
+        require('project/module/templates');
+        // require 或 use 模块，构造模块的代码之后执行一次。因此需要每次都render
+        seajs.use('project/module/unit/chart/chart',function(view){view.render()});
     });
     //启用路由功能
     Backbone.history.start();
