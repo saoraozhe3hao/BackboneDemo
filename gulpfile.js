@@ -6,7 +6,7 @@ var through = require("through2");
 // 定义任务，传入任务名 和 任务脚本
 gulp.task('default', function() {
     // src 获取匹配文件，pipe 通过管道流给其他插件处理。
-    gulp.src('project/module/**/*.js', { base: 'project' })
+    gulp.src('project/module/**/*.js', { base: 'project' }) // base 是指 只取这个路径“以下”的内容
         .pipe(jsmin())
         .pipe(through.obj(function(file, encode, cb) {
             // 获取内容
