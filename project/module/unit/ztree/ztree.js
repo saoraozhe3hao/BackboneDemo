@@ -36,7 +36,7 @@ define(['../../widget/left/left'],function (require, exports, module) {
             // $el 即 el对应的jQuery对象。引用全局模板
             me.$el.html(window.templates['project/module/unit/ztree/ztree.html']);
             // el 即 这个View 新建的元素节点
-            $("#content").append(me.el);
+            $(me.options.wrapper).append(me.el);
 
             /******************************* zTree http://www.ztree.me/v3/main.php ，除了核心库以为，还可以使用扩展：编辑，移动，选择 ，拖动，隐藏 ***********************************************/
             /******************************** zTree 配置 *******************************************/
