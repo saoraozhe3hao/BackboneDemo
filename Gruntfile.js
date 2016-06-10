@@ -31,12 +31,22 @@ module.exports = function (grunt) {
                 dest: 'project/module/templates.js'
             }
         },
+        transport:{     // CMD 模块转换
+            tpl: {      // html 转 CMD
+                files: [{
+                    expand: true,
+                    cwd: 'project',    // 基础路径
+                    src: '**/*.html',
+                    dest: 'project'
+                }]
+            }
+        },
         watch: {
             jst: {
                 //监控对象，匹配project下的所有文件
                 files: 'project/**/*.html',
                 //监控对象发生变化，出发的任务
-                tasks: 'html2js'
+                tasks: ['html2js','transport']
             }
         }
     });
@@ -45,5 +55,5 @@ module.exports = function (grunt) {
     // These plugins provide necessary tasks.
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
 
-    grunt.registerTask('watchJst',['html2js','watch:jst']);
+    grunt.registerTask('watchJst',['html2js','transport','watch:jst']);
 };

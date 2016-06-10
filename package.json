@@ -10,6 +10,9 @@
     "grunt-contrib-watch": "~0.6.1",
     "gulp": "^3.9.1",
     "gulp-jsmin": "^0.1.5",
-    "load-grunt-tasks": "~3.2.0"
+    "load-grunt-tasks": "~3.2.0",
+    "grunt-cmd-transport": "^0.5.1"
+  },
+  "dependencies": {
   }
 }

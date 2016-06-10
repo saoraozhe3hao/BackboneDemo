@@ -1,7 +1,7 @@
 //定义一个模块，参数分别为 模块ID，依赖模块列表，工厂函数
 //模块ID说明：如果本文件里定义的模块 所声明的ID 都与本文件不同名，那么本文件最后一个没声明ID的模块 的ID 与本文件 同名
 //依赖模块列表说明：未被下载的文件会被下载下来，但是不会执行模块function里的内容，只在被use 或 require时，才会被执行
-define('project/module/unit/ztree/ztree',['../../widget/left/left'],function (require, exports, module) {
+define(['../../widget/left/left'],function (require, exports, module) {
 
     //该模块定义写了依赖，那么在这个模块里除了 module.dependencies 里的模块，不能require 其他模块
     var Left = require(module.dependencies[0]);
