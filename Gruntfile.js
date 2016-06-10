@@ -33,11 +33,25 @@ module.exports = function (grunt) {
         },
         transport:{     // CMD 模块转换
             tpl: {      // html 转 CMD
+                options: {
+                    debug: false
+                },
                 files: [{
                     expand: true,
                     cwd: 'project',    // 基础路径
                     src: '**/*.html',
-                    dest: 'project'
+                    dest: 'cmd-dest'
+                }]
+            },
+            'directory': {
+                options: {
+                    debug: false
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'project',
+                    src: '**/*.js',
+                    dest: 'cmd-dest'
                 }]
             }
         },
