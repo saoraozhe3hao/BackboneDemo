@@ -13,7 +13,7 @@ define(function (require, exports, module) {
         className: "chartClass",
         //初始化方法，实例化时会调用
         initialize: function (options) {
-            //传进来的options 会自动赋给 this.options
+            //传进来的options 会自动覆盖 defaults
             // 实例化左侧导航部件，参数传给 Left 的 initialize
             this.widget.left = new Left({wrapper: this.options.wrapper});
         },
